@@ -98,4 +98,16 @@ public class BlogTest {
     assertEquals("This is the new stuff about food", testBlog.getContent());
   }
 
+  @Test
+  public void addTag_addsTagToBlog() {
+    Blog testBlog = blog;
+    testBlog.save();
+    Tag testTag = new Tag("tageeee");
+    testTag.save();
+    testBlog.addTag(testTag);
+    Tag savedTag = testBlog.getTags().get(0);
+    assertTrue(testTag.equals(savedTag));
+  }
+
+
 }

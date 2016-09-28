@@ -7,6 +7,7 @@ public class Tag implements DatabaseManagement {
   private String name;
   private int id;
 
+
   public Tag(String name) {
     this.name = name;
   }
