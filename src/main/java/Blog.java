@@ -41,6 +41,24 @@ public class Blog {
     }
   }
 
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "delete from blogs where id = :id;";
+      con.createQuery(sql)
+        .addParameter("id", this.id)
+        .executeUpdate();
+    }
+  }
+
+  public void editBlog() {
+    try (Connection con = DB.sql2o.open()){
+      String sql = "update blogs set content = :content where id=:id";
+      con.createQuery(sql)
+      .addParameter("content", this.content)
+      .executeUpdate();
+    }
+  }
+
   @Override
   public boolean equals(Object otherBlog) {
     if (!(otherBlog instanceof Blog)) {
@@ -69,4 +87,6 @@ public class Blog {
       return blog;
     }
   }
+
+
 }

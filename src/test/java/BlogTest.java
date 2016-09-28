@@ -82,4 +82,12 @@ public class BlogTest {
     assertEquals(rightNow.getDay(), savedBlogBirthday.getDay());
   }
 
+  @Test
+  public void delete_deletesBlog_true(){
+    Blog testBlog = blog;
+    testBlog.save();
+    testBlog.delete();
+    assertEquals(null, Blog.find(testBlog.getId()));
+  }
+
 }
