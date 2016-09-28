@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.Timestamp;
 
-public class Blog {
+public class Blog implements DatabaseManagement {
   private String name;
   private String content;
   private Timestamp created;
@@ -30,6 +30,7 @@ public class Blog {
     return id;
   }
 
+  @Override
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO blogs (name, content, created) VALUES (:name, :content, now())";
@@ -41,6 +42,7 @@ public class Blog {
     }
   }
 
+  @Override
   public void delete() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "delete from blogs where id = :id;";
@@ -50,7 +52,8 @@ public class Blog {
     }
   }
 
-  public void editBlog(String updatedContent) {
+  @Override
+  public void update(String updatedContent) {
     try (Connection con = DB.sql2o.open()){
       this.content = updatedContent;
       String sql = "update blogs set content = :content where id=:id";

@@ -94,8 +94,7 @@ public class BlogTest {
   public void edit_editBlogReturnsUpdatedContent_True(){
     Blog testBlog = blog;
     testBlog.save();
-    testBlog.editBlog("This is the new stuff about food");
-    System.out.printf(testBlog.getContent());
+    testBlog.update("This is the new stuff about food");
     assertEquals("This is the new stuff about food", testBlog.getContent());
   }
 
