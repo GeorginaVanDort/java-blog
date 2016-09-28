@@ -50,11 +50,13 @@ public class Blog {
     }
   }
 
-  public void editBlog() {
+  public void editBlog(String updatedContent) {
     try (Connection con = DB.sql2o.open()){
+      this.content = updatedContent;
       String sql = "update blogs set content = :content where id=:id";
       con.createQuery(sql)
       .addParameter("content", this.content)
+      .addParameter("id", this.id)
       .executeUpdate();
     }
   }

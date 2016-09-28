@@ -90,4 +90,13 @@ public class BlogTest {
     assertEquals(null, Blog.find(testBlog.getId()));
   }
 
+  @Test
+  public void edit_editBlogReturnsUpdatedContent_True(){
+    Blog testBlog = blog;
+    testBlog.save();
+    testBlog.editBlog("This is the new stuff about food");
+    System.out.printf(testBlog.getContent());
+    assertEquals("This is the new stuff about food", testBlog.getContent());
+  }
+
 }
