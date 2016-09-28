@@ -54,6 +54,13 @@ public class Blog implements DatabaseManagement {
     }
   }
 
+// gettags method idea.
+  SELECT tags.* FROM blogs
+  JOIN blog_tag ON (blogs.id = blog_tag.blog_id)
+  JOIN tags ON (blog_tag.tag_id = tags.id)
+  WHERE blogs.id = 1;
+
+// getblogs by tags
 SELECT blogs.* FROM tags
 JOIN blog_tag ON (tags.id = blog_tag.tag_id)
 JOIN blogs ON (blog_tag.blog_id = blogs.id)
