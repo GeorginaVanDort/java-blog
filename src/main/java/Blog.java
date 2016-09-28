@@ -26,6 +26,10 @@ public class Blog {
     return created;
   }
 
+  public int getId() {
+    return id;
+  }
+
   public void save() {
     try(Connection con = DB.sql2o.open()) {
       String sql = "INSERT INTO blogs (name, content, created) VALUES (:name, :content, now())";
@@ -53,6 +57,16 @@ public class Blog {
     try(Connection con = DB.sql2o.open()) {
       return con.createQuery(sql)
       .executeAndFetch(Blog.class);
+    }
+  }
+
+  public static Blog find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM blogs WHERE id=:id";
+      Blog blog = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Blog.class);
+      return blog;
     }
   }
 }
