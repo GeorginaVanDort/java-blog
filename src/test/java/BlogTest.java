@@ -13,6 +13,8 @@ public class BlogTest {
 
   Blog blog = new Blog("Food", "I love food!");
   Blog blog2 = new Blog("OtherFood", "Other food I love!");
+  Blog blog3 = new Blog("ThatFood", "It was okay.");
+  Blog blog4 = new Blog("NotFood", "ugh!");
 
   @Test
   public void blog_instantiatesCorrectly_true() {
@@ -65,28 +67,6 @@ public class BlogTest {
   }
 
   @Test
-  public void getTagsbyBlog_returnsAllInstancesOfBlog_true() {
-    Blog firstBlog = blog;
-    firstBlog.save();
-    Blog secondBlog = blog2;
-    secondBlog.save();
-    Tag tag1 = new Tag("Cooking");
-    tag1.save();
-    Tag tag2 = new Tag("Cleaning");
-    tag2.save();
-    Tag tag3 = new Tag("Swordplay");
-    tag3.save();
-    Tag tag4 = new Tag("Reading");
-    tag4.save();
-    firstBlog.addTag(tag1);
-    firstBlog.addTag(tag2);
-    firstBlog.addTag(tag3);
-    secondBlog.addTag(tag4);
-    List savedTags = firstBlog.getTagsByBlog();
-    assertEquals(3, savedTags.size());
-  }
-
-  @Test
   public void find_returnsBlogWithSameId_secondBlog() {
     Blog firstBlog = blog;
     firstBlog.save();
@@ -120,16 +100,47 @@ public class BlogTest {
     assertEquals("This is the new stuff about food", testBlog.getContent());
   }
 
-  // @Test
-  // public void addTag_addsTagToBlog() {
-  //   Blog testBlog = blog;
-  //   testBlog.save();
-  //   Tag testTag = new Tag("tageeee");
-  //   testTag.save();
-  //   testBlog.addTag(testTag);
-  //   Tag savedTag = testBlog.getTags().get(0);
-  //   assertTrue(testTag.equals(savedTag));
-  // }
+  @Test
+  public void getTagsByBlog_returnsAllInstancesOfBlog_true() {
+    Blog firstBlog = blog;
+    firstBlog.save();
+    Blog secondBlog = blog2;
+    secondBlog.save();
+    Tag tag1 = new Tag("Cooking");
+    tag1.save();
+    Tag tag2 = new Tag("Cleaning");
+    tag2.save();
+    Tag tag3 = new Tag("Swordplay");
+    tag3.save();
+    Tag tag4 = new Tag("Reading");
+    tag4.save();
+    firstBlog.addTag(tag1);
+    firstBlog.addTag(tag2);
+    firstBlog.addTag(tag3);
+    secondBlog.addTag(tag1);
+    List savedTags = firstBlog.getTagsByBlog();
+    assertEquals(3, savedTags.size());
+  }
+
+  @Test
+  public void getBlogsByTags_returnsAllInstancesOfBlog_true() {
+    Blog firstBlog = blog;
+    firstBlog.save();
+    Blog secondBlog = blog2;
+    secondBlog.save();
+    Blog thirdBlog = blog3;
+    thirdBlog.save();
+    Blog fourthBlog = blog4;
+    fourthBlog.save();
+    Tag tag1 = new Tag("Cleaning");
+    tag1.save();
+    firstBlog.addTag(tag1);
+    secondBlog.addTag(tag1);
+    thirdBlog.addTag(tag1);
+    fourthBlog.addTag(tag1);
+    List savedBlogs = tag1.getBlogsByTag();
+    assertEquals(4, savedBlogs.size());
+  }
 
 
 }
