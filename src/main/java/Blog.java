@@ -47,24 +47,27 @@ public class Blog implements DatabaseManagement {
   public void addTag(Tag tag) {
     try(Connection con = DB.sql2o.open()) {
       String joinQuery = "insert into blog_tag (blog_id, tag_id) values (:blog_id, :tag_id);";
-      con.createQuery(sql)
+      con.createQuery(joinQuery)
       .addParameter("blog_id", this.getId())
       .addParameter("tag_id", tag.getId())
       .executeUpdate();
     }
   }
 
-// gettags method idea.
-  SELECT tags.* FROM blogs
-  JOIN blog_tag ON (blogs.id = blog_tag.blog_id)
-  JOIN tags ON (blog_tag.tag_id = tags.id)
-  WHERE blogs.id = 1;
+  public List<Tag> getTagsByBlog() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT tags.* FROM blogs JOIN blog_tag ON (blogs.id = blog_tag.blog_id) JOIN tags ON (blog_tag.tag_id = tags.id) WHERE blogs.id = :blog_id;";
+      return con.createQuery(sql)
+      .addParameter("blog_id", this.getId())
+      .executeAndFetch(Tag.class);
+    }
+  }
 
-// getblogs by tags
-SELECT blogs.* FROM tags
-JOIN blog_tag ON (tags.id = blog_tag.tag_id)
-JOIN blogs ON (blog_tag.blog_id = blogs.id)
-WHERE tags.id = 1;
+// // getblogs by tags
+// SELECT blogs.* FROM tags
+// JOIN blog_tag ON (tags.id = blog_tag.tag_id)
+// JOIN blogs ON (blog_tag.blog_id = blogs.id)
+// WHERE tags.id = 1;
 
   @Override
   public void delete() {
