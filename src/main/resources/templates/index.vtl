@@ -1,0 +1,9 @@
+<div class="text-center">
+  <h2>Today's Blofs</h2>
+
+  <ul>
+    #foreach ($blog in $blogs)
+      <li><a href="/blog/$blog.getId()">$blog.getName()</a></li>
+    #end
+  </ul>
+</div>
