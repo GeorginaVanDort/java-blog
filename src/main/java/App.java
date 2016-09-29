@@ -37,5 +37,31 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/tags", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("tags", Tag.all());
+      model.put("template", "templates/tags.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/newblog", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      model.put("tags", Tag.all());
+      model.put("template", "templates/newblog.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/newblog", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      String name = request.queryParams("name");
+      String content = request.queryParams("content");
+      Tag tag = Tag.find(Integer.parseInt(request.queryParams("tag")));
+      Blog blog = new Blog(name, content);
+      blog.save();
+      blog.addTag(tag);
+      response.redirect("/");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
   }
 }
