@@ -14,6 +14,7 @@ public class Blog implements DatabaseManagement {
   public Blog(String name, String content) {
     this.name = name;
     this.content = content;
+    tagNumber = 0;
   }
 
   public String getName() {
@@ -45,6 +46,9 @@ public class Blog implements DatabaseManagement {
   }
 
   public void addTag(Tag tag) {
+    if (tagNumber >= MAX_TAG_NUMBER) {
+      throw new UnsupportedOperationException ("You can only choose up to three tags");
+    }
     try(Connection con = DB.sql2o.open()) {
       String joinQuery = "insert into blog_tag (blog_id, tag_id) values (:blog_id, :tag_id);";
       con.createQuery(joinQuery)
@@ -52,7 +56,10 @@ public class Blog implements DatabaseManagement {
       .addParameter("tag_id", tag.getId())
       .executeUpdate();
     }
+    tagNumber++;
   }
+
+  //removetag()
 
   public List<Tag> getTagsByBlog() {
     try(Connection con = DB.sql2o.open()) {

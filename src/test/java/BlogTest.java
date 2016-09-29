@@ -142,5 +142,14 @@ public class BlogTest {
     assertEquals(4, savedBlogs.size());
   }
 
+  @Test(expected = UnsupportedOperationException.class)
+  public void addTag_throwsExceptionIfTagsatMaxLevel_true() {
+    Blog blog = blog;
+    for (int i = 0; i <=(blog.MAX_TAG_NUMBER); i++) {
+      Tag tag[i] = new Tag("Tag "+[i]);
+      tag[i].save();
+      firstBlog.addTag(tag[i]);
+    }
+  }
 
 }
