@@ -142,14 +142,31 @@ public class BlogTest {
     assertEquals(4, savedBlogs.size());
   }
 
+  // @Test(expected = UnsupportedOperationException.class)
+  // public void addTag_throwsExceptionIfTagsatMaxLevel_true() {
+  //   Blog blog = blog;
+  //   for (int i = 0; i <=(blog.MAX_TAG_NUMBER); i++) {
+  //     Tag tag(i) = new Tag("Tag "+(i));
+  //     tag(i).save();
+  //     firstBlog.addTag(tag(i));
+  //   }
+  // }
+
   @Test(expected = UnsupportedOperationException.class)
   public void addTag_throwsExceptionIfTagsatMaxLevel_true() {
-    Blog blog = blog;
-    for (int i = 0; i <=(blog.MAX_TAG_NUMBER); i++) {
-      Tag tag[i] = new Tag("Tag "+i);
-      tag[i].save();
-      firstBlog.addTag(tag[i]);
-    }
+    Blog firstBlog = blog;
+    Tag tag1 = new Tag("Cooking");
+    tag1.save();
+    Tag tag2 = new Tag("Cleaning");
+    tag2.save();
+    Tag tag3 = new Tag("Swordplay");
+    tag3.save();
+    Tag tag4 = new Tag("Reading");
+    tag4.save();
+    firstBlog.addTag(tag1);
+    firstBlog.addTag(tag2);
+    firstBlog.addTag(tag3);
+    // firstBlog.addTag(tag4);
   }
 
 }

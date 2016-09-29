@@ -7,6 +7,7 @@ public class Blog implements DatabaseManagement {
   private String name;
   private String content;
   private Timestamp created;
+  private int tagNumber;
   private int id;
 
   private static final int MAX_TAG_NUMBER = 3;
@@ -14,7 +15,7 @@ public class Blog implements DatabaseManagement {
   public Blog(String name, String content) {
     this.name = name;
     this.content = content;
-    tagNumber = 0;
+    tagNumber = MAX_TAG_NUMBER - 3;
   }
 
   public String getName() {
@@ -31,6 +32,10 @@ public class Blog implements DatabaseManagement {
 
   public int getId() {
     return id;
+  }
+
+  public int getTagNumber() {
+    return tagNumber;
   }
 
   @Override
