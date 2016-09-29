@@ -142,16 +142,6 @@ public class BlogTest {
     assertEquals(4, savedBlogs.size());
   }
 
-  // @Test(expected = UnsupportedOperationException.class)
-  // public void addTag_throwsExceptionIfTagsatMaxLevel_true() {
-  //   Blog blog = blog;
-  //   for (int i = 0; i <=(blog.MAX_TAG_NUMBER); i++) {
-  //     Tag tag(i) = new Tag("Tag "+(i));
-  //     tag(i).save();
-  //     firstBlog.addTag(tag(i));
-  //   }
-  // }
-
   @Test(expected = UnsupportedOperationException.class)
   public void addTag_throwsExceptionIfTagsatMaxLevel_true() {
     Blog firstBlog = blog;
@@ -166,7 +156,19 @@ public class BlogTest {
     firstBlog.addTag(tag1);
     firstBlog.addTag(tag2);
     firstBlog.addTag(tag3);
-    // firstBlog.addTag(tag4);
+    firstBlog.addTag(tag4);
   }
 
 }
+
+// Does this work? No... :(
+
+// @Test(expected = UnsupportedOperationException.class)
+// public void addTag_throwsExceptionIfTagsatMaxLevel_true() {
+//   Blog blog = blog;
+//   for (int i = 0; i <=(blog.MAX_TAG_NUMBER); i++) {
+//     Tag tag(i) = new Tag("Tag "+(i));
+//     tag(i).save();
+//     firstBlog.addTag(tag(i));
+//   }
+// }
